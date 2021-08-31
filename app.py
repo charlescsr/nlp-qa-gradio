@@ -6,7 +6,7 @@ passage = "Hoping to rebound from their loss to the Patriots, the Raiders stayed
 question = "How many yards was the longest passing touchdown?"
 
 def qa(passage, question):
-    predictor = Predictor.from_path("https://storage.googleapis.com/allennlp-public-models/bidaf-elmo.2021-02-11.tar.gz")
+    predictor = Predictor.from_path("bidaf-elmo.2021-02-11.tar.gz")
     ans = predictor.predict(
             passage=passage,
             question=question
@@ -15,7 +15,7 @@ def qa(passage, question):
     return ans['best_span_str']
 
 iface = gr.Interface(qa, 
-                     inputs=[gr.inputs.Textbox(lines=25, default=passage), 
-                             gr.inputs.Textbox(default=question)],
+                     inputs=[gr.inputs.Textbox(lines=15), 
+                             gr.inputs.Textbox()],
                      outputs=["text"])
 iface.launch()
